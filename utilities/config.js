@@ -15,7 +15,11 @@ mongoose.connection.once('open', () => {
     console.log("Oops! database connection error:" + error);
 });
 let Collections = [
-    { text: 'Our Teams', value: 'ourteams' }
+    { text: 'Admins', value: 'admins' },
+    { text: 'Roles', value: 'roles' },
+    { text: 'Permissions', value: 'permissions' },
+    { text: 'Customers', value: 'customers' },
+    { text: 'Domains', value: 'domains' }
 ];
 async function encryptPassword(plainPassword) {
     var encLayer1 = CryptoJS.AES.encrypt(plainPassword, process.env.PASSWORD_ENCRYPTION_SECRET).toString();
