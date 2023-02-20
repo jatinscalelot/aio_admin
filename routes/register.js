@@ -5,6 +5,7 @@ const responseManager = require('../utilities/response.manager');
 const constants = require('../utilities/constants');
 const helper = require('../utilities/helper');
 const adminModel = require('../models/admins.model');
+const mongoose = require('mongoose');
 router.post('/', async (req, res) => {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
     res.setHeader('Access-Control-Allow-Origin', '*');

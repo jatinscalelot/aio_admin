@@ -47,14 +47,12 @@ async function getPermission(roleID, modelName, permissionType, secondaryDB) {
                 else
                     return false;
             }
-
             if (permissionType == "insertUpdate") {
                 if (permisions[0].insertUpdate == true)
                     return true;
                 else
                     return false;
             }
-
             if (permissionType == "delete") {
                 if (permisions[0].delete == true)
                     return true;

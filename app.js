@@ -15,7 +15,9 @@ var usersRouter = require('./routes/users');
 const adminpaths = [
   { pathUrl: '/login', routeFile: 'login'},
   { pathUrl: '/register', routeFile: 'register'},
-  { pathUrl: '/roles', routeFile: 'roles'}
+  { pathUrl: '/roles', routeFile: 'roles'},
+  { pathUrl: '/admin', routeFile: 'admin'},
+  { pathUrl: '/customer', routeFile: 'customer'}
 ];
 var app = express();
 // view engine setup
