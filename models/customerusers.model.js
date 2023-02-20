@@ -5,18 +5,14 @@ let schema = new mongoose.Schema({
         type: Boolean,
         require : true
     },
-	web_status : {
-		type: String,
-        enum: ['online', 'offline']
-	},
-	app_status : {
-		type: String,
-        enum: ['online', 'offline']
-	},
-	country : {
-		type: mongoose.Types.ObjectId,
+    parentId : {
+        type: mongoose.Types.ObjectId,
 		require: true
-	},
+    },
+    role : {
+        type: mongoose.Types.ObjectId,
+		require: true
+    },
 	createdBy: {
 		type: mongoose.Types.ObjectId,
 		default: null

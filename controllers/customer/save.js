@@ -9,9 +9,10 @@ const mongoose = require('mongoose');
 exports.save = async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     if (req.token.adminid && mongoose.Types.ObjectId.isValid(req.token.adminid)) {
-        const { customerid, name, email, mobile, country_code, password, domain } = req.body;
+        const { customerid, full_name, company_name, email, country_code, mobile, country, password } = req.body;
         if(customerid && customerid != '' && mongoose.Types.ObjectId.isValid(customerid)){
-            if (name && name.trim() != '' && email && email.trim() != '' && (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) && mobile && mobile.length == 10 && country_code && country_code.trim() != '' && domain && domain.trim() != '') {
+            
+            if (full_name && full_name.trim() != '' && email && email.trim() != '' && (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) && mobile && mobile.length == 10 && country_code && country_code.trim() != '' && domain && domain.trim() != '') {
                 let primary = mongoConnection.useDb(constants.DEFAULT_DB);
                 let checkExisting = await primary.model(constants.MODELS.customers, customerModel).findOne({ $or: [{ mobile: mobile }, { email: email }], _id : { $ne : mongoose.Types.ObjectId(customerid)} }).lean();
                 if (checkExisting == null) {
