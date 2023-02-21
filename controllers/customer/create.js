@@ -82,7 +82,7 @@ exports.create = async (req, res) => {
                             let primarypermissionCreated = await secondarydb.model(constants.MODELS.permissions, permissionModel).create(primarypermissionsPayload);
                             if (primarypermissionCreated != null) {
                                 // send email to admin user from here...
-                                return responseManager.onSuccess("Customer created successfully!", 1, res);
+                                return responseManager.onSuccess("Customer created successfully!", createdCustomer, res);
                             } else {
                                 return responseManager.badrequest({ message: 'Customer not created, There is something went wrong..., please try again...' }, res);
                             }

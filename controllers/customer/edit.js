@@ -48,7 +48,8 @@ exports.edit = async (req, res) => {
                                     updatedBy: mongoose.Types.ObjectId(req.token.adminid)
                                 };
                                 await secondarydb.model(constants.MODELS.customerusers, customeruserModel).findByIdAndUpdate(adminData._id, adminuserObj);
-                                return responseManager.onSuccess("Customer data updated successfully!", 1, res);
+                                let finalcustomerData = await primary.model(constants.MODELS.customers, customerModel).findById(customerid).lean();
+                                return responseManager.onSuccess("Customer data updated successfully!", finalcustomerData, res);
                             }
                         } else {
                             let adminuserObj = {
@@ -59,7 +60,8 @@ exports.edit = async (req, res) => {
                                 updatedBy: mongoose.Types.ObjectId(req.token.adminid)
                             };
                             await secondarydb.model(constants.MODELS.customerusers, customeruserModel).findByIdAndUpdate(adminData._id, adminuserObj);
-                            return responseManager.onSuccess("Customer data updated successfully!", 1, res);
+                            let finalcustomerData = await primary.model(constants.MODELS.customers, customerModel).findById(customerid).lean();
+                            return responseManager.onSuccess("Customer data updated successfully!", finalcustomerData, res);
                         }
                     } else {
                         return responseManager.badrequest({ message: 'Customer already exist with same mobile or email..., please try other email and phone...' }, res);
