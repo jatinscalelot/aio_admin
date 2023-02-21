@@ -18,21 +18,21 @@ exports.create = async (req, res) => {
             let primary = mongoConnection.useDb(constants.DEFAULT_DB);
             let ecnPassword = await helper.passwordEncryptor(password);
             let countryData = await primary.model(constants.MODELS.countries, countriesModel).findById(country).lean();
-            let checkExisting = await primary.model(constants.MODELS.customers, customerModel).findOne({ $or: [{ mobile: mobile }, { email: email }]}).lean();
+            let checkExisting = await primary.model(constants.MODELS.customers, customerModel).findOne({ $or: [{ mobile: mobile }, { email: email }] }).lean();
             if (checkExisting == null) {
                 let obj = {
                     full_name: full_name,
                     company_name: company_name,
-                    email : email,
+                    email: email,
                     mobile: mobile,
                     country_code: country_code,
-                    domain : '',
-                    status : true,
-                    web_status : 'offline',
-                    app_status : 'offline',
-                    database : 'db_' + company_name.toLowerCase().replace(/\s/g, '') +'_'+ helper.makeid(5).toLowerCase() + '_' +countryData.name.toLowerCase().replace(/\s/g, ''),
-                    country : mongoose.Types.ObjectId(country),
-                    createdBy : mongoose.Types.ObjectId(req.token.adminid),
+                    domain: '',
+                    status: true,
+                    web_status: 'offline',
+                    app_status: 'offline',
+                    database: 'db_' + company_name.toLowerCase().replace(/\s/g, '') + '_' + helper.makeid(5).toLowerCase() + '_' + countryData.name.toLowerCase().replace(/\s/g, ''),
+                    country: mongoose.Types.ObjectId(country),
+                    createdBy: mongoose.Types.ObjectId(req.token.adminid),
                     updatedBy: mongoose.Types.ObjectId(req.token.adminid)
                 };
                 let createdCustomer = await primary.model(constants.MODELS.customers, customerModel).create(obj);
@@ -42,19 +42,19 @@ exports.create = async (req, res) => {
                     let primaryroleCreated = await secondarydb.model(constants.MODELS.customerroles, customerroleModel).create(primaryRolePayload);
                     if (primaryroleCreated != null) {
                         let adminuserObj = {
-                            full_name : full_name,
-                            email : email,
+                            full_name: full_name,
+                            email: email,
                             mobile: mobile,
                             country_code: country_code,
-                            parentId : mongoose.Types.ObjectId(createdCustomer._id),
-                            roleId : mongoose.Types.ObjectId(primaryroleCreated._id),
-                            status : true,
-                            password : ecnPassword,
-                            createdBy : mongoose.Types.ObjectId(req.token.adminid),
+                            parentId: mongoose.Types.ObjectId(createdCustomer._id),
+                            roleId: mongoose.Types.ObjectId(primaryroleCreated._id),
+                            status: true,
+                            password: ecnPassword,
+                            createdBy: mongoose.Types.ObjectId(req.token.adminid),
                             updatedBy: mongoose.Types.ObjectId(req.token.adminid)
                         };
                         let adminuserCreated = await secondarydb.model(constants.MODELS.customerusers, customeruserModel).create(adminuserObj);
-                        if(adminuserCreated != null){
+                        if (adminuserCreated != null) {
                             let primarypermissionsData = [
                                 {
                                     "collectionName": "customerroles",
@@ -64,11 +64,11 @@ exports.create = async (req, res) => {
                                     "_id": new mongoose.Types.ObjectId()
                                 },
                                 {
-                                  "collectionName": "permissions",
-                                  "insertUpdate": true,
-                                  "delete": true,
-                                  "view": true,
-                                  "_id": new mongoose.Types.ObjectId()
+                                    "collectionName": "permissions",
+                                    "insertUpdate": true,
+                                    "delete": true,
+                                    "view": true,
+                                    "_id": new mongoose.Types.ObjectId()
                                 },
                                 {
                                     "collectionName": "customerusers",
@@ -80,27 +80,28 @@ exports.create = async (req, res) => {
                             ];
                             let primarypermissionsPayload = { roleId: primaryroleCreated._id, permission: primarypermissionsData, updatedBy: mongoose.Types.ObjectId(adminuserCreated._id), createdBy: mongoose.Types.ObjectId(adminuserCreated._id) };
                             let primarypermissionCreated = await secondarydb.model(constants.MODELS.permissions, permissionModel).create(primarypermissionsPayload);
-                            if(primarypermissionCreated != null){
+                            if (primarypermissionCreated != null) {
+                                // send email to admin user from here...
                                 return responseManager.onSuccess("Customer created successfully!", 1, res);
-                            }else{
+                            } else {
                                 return responseManager.badrequest({ message: 'Customer not created, There is something went wrong..., please try again...' }, res);
                             }
-                        }else{
+                        } else {
                             return responseManager.badrequest({ message: 'Customer not created, There is something went wrong..., please try again...' }, res);
-                        } 
-                    }else{
+                        }
+                    } else {
                         return responseManager.badrequest({ message: 'Customer not created, There is something went wrong..., please try again...' }, res);
                     }
-                }else{
+                } else {
                     return responseManager.badrequest({ message: 'Customer not created, There is something went wrong..., please try again...' }, res);
                 }
             } else {
                 return responseManager.badrequest({ message: 'Customer already exist with same mobile or email..., please try again...!' }, res);
             }
-        }else{
+        } else {
             return responseManager.badrequest({ message: 'Invalid data to create new customer..., please try again...' }, res);
         }
-    }else{
+    } else {
         return responseManager.badrequest({ message: 'Invalid token to set customer data, please try again' }, res);
     }
 };
