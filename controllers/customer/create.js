@@ -53,7 +53,7 @@ exports.create = async (req, res) => {
                             createdBy: mongoose.Types.ObjectId(req.token.adminid),
                             updatedBy: mongoose.Types.ObjectId(req.token.adminid)
                         };
-                        let adminuserCreated = await secondarydb.model(constants.MODELS.customerusers, customeruserModel).create(adminuserObj);
+                        let adminuserCreated = await primary.model(constants.MODELS.customerusers, customeruserModel).create(adminuserObj);
                         if (adminuserCreated != null) {
                             let primarypermissionsData = [
                                 {

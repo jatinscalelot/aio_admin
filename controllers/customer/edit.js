@@ -36,7 +36,7 @@ exports.edit = async (req, res) => {
                             updatedBy: mongoose.Types.ObjectId(req.token.adminid)
                         };
                         await primary.model(constants.MODELS.customers, customerModel).findByIdAndUpdate(customerid, obj);
-                        let adminData = await secondarydb.model(constants.MODELS.customerusers, customeruserModel).findOne({email : customerData.email, mobile : customerData.mobile, parentId : mongoose.Types.ObjectId(customerData._id)}).lean();
+                        let adminData = await primary.model(constants.MODELS.customerusers, customeruserModel).findOne({email : customerData.email, mobile : customerData.mobile, parentId : mongoose.Types.ObjectId(customerData._id)}).lean();
                         if (ecnPassword != '') {
                             if(adminData){
                                 let adminuserObj = {
