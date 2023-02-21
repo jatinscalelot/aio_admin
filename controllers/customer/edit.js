@@ -47,7 +47,7 @@ exports.edit = async (req, res) => {
                                     password: ecnPassword,
                                     updatedBy: mongoose.Types.ObjectId(req.token.adminid)
                                 };
-                                await secondarydb.model(constants.MODELS.customerusers, customeruserModel).findByIdAndUpdate(adminData._id, adminuserObj);
+                                await primary.model(constants.MODELS.customerusers, customeruserModel).findByIdAndUpdate(adminData._id, adminuserObj);
                                 let finalcustomerData = await primary.model(constants.MODELS.customers, customerModel).findById(customerid).lean();
                                 return responseManager.onSuccess("Customer data updated successfully!", finalcustomerData, res);
                             }
@@ -59,7 +59,7 @@ exports.edit = async (req, res) => {
                                 country_code: country_code,
                                 updatedBy: mongoose.Types.ObjectId(req.token.adminid)
                             };
-                            await secondarydb.model(constants.MODELS.customerusers, customeruserModel).findByIdAndUpdate(adminData._id, adminuserObj);
+                            await primary.model(constants.MODELS.customerusers, customeruserModel).findByIdAndUpdate(adminData._id, adminuserObj);
                             let finalcustomerData = await primary.model(constants.MODELS.customers, customerModel).findById(customerid).lean();
                             return responseManager.onSuccess("Customer data updated successfully!", finalcustomerData, res);
                         }

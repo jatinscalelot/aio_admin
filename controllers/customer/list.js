@@ -13,7 +13,11 @@ exports.list = async (req, res) => {
         let primary = mongoConnection.useDb(constants.DEFAULT_DB);
         primary.model(constants.MODELS.customers, customerModel).paginate({
             $or: [
-                { name: { '$regex': new RegExp(search, "i") } }
+                { full_name: { '$regex': new RegExp(search, "i") } },
+                { company_name: { '$regex': new RegExp(search, "i") } },
+                { email: { '$regex': new RegExp(search, "i") } },
+                { mobile: { '$regex': new RegExp(search, "i") } },
+                { domain: { '$regex': new RegExp(search, "i") } }
             ],
         }, {
             page,
