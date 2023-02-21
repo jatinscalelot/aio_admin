@@ -35,4 +35,3 @@ exports.list = async (req, res) => {
         return responseManager.badrequest({ message: 'Invalid token to get customer list, please try again' }, res);
     }
 };
-module.exports = router;

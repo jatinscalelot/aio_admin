@@ -79,4 +79,3 @@ exports.edit = async (req, res) => {
         return responseManager.badrequest({ message: 'Invalid token to update customer detail..., please try again...' }, res);
     }
 };
-module.exports = router;

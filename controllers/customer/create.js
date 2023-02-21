@@ -105,4 +105,3 @@ exports.create = async (req, res) => {
         return responseManager.badrequest({ message: 'Invalid token to set customer data, please try again' }, res);
     }
 };
-module.exports = router;

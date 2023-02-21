@@ -33,4 +33,3 @@ exports.list = async (req, res) => {
         return responseManager.badrequest({ message: 'Invalid token to get admin list, please try again' }, res);
     }
 };
-module.exports = router;

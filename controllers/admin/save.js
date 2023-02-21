@@ -62,4 +62,3 @@ exports.save = async (req, res) => {
         return responseManager.badrequest({ message: 'Invalid token to set admin data, please try again' }, res);
     }
 };
-module.exports = router;
