@@ -10,7 +10,7 @@ const countriesModel = require('../../models/countries.model');
 const customerroleModel = require('../../models/customerroles.model');
 const permissionModel = require('../../models/permissions.model');
 const mongoose = require('mongoose');
-exports.create = async (req, res) => {
+exports.domain = async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     if (req.token.adminid && mongoose.Types.ObjectId.isValid(req.token.adminid)) {
         const { customerid, domain } = req.body;
