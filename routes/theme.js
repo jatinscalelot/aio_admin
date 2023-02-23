@@ -1,10 +1,10 @@
 let express = require("express");
 let router = express.Router();
 const helper = require('../utilities/helper');
-const saveAdminCtrl = require('../controllers/admin/save');
-const listAdminCtrl = require('../controllers/admin/list');
-const getoneAdminCtrl = require('../controllers/admin/getone');
-router.post('/', helper.authenticateToken, listAdminCtrl.list);
-router.post('/save', helper.authenticateToken, saveAdminCtrl.save);
-router.post('/getone', helper.authenticateToken, getoneAdminCtrl.getone);
+const saveThemeCtrl = require('../controllers/theme/save');
+const listThemeCtrl = require('../controllers/theme/list');
+const getoneThemeCtrl = require('../controllers/theme/getone');
+router.post('/', helper.authenticateToken, listThemeCtrl.list);
+router.post('/save', helper.authenticateToken, saveThemeCtrl.save);
+router.post('/getone', helper.authenticateToken, getoneThemeCtrl.getone);
 module.exports = router;
