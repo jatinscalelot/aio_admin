@@ -17,7 +17,10 @@ const adminpaths = [
   { pathUrl: '/register', routeFile: 'register'},
   { pathUrl: '/roles', routeFile: 'roles'},
   { pathUrl: '/admin', routeFile: 'admin'},
-  { pathUrl: '/customer', routeFile: 'customer'}
+  { pathUrl: '/customer', routeFile: 'customer'},
+  { pathUrl: '/forgetpassword', routeFile: 'forgetpassword'},
+  { pathUrl: '/resetpassword', routeFile: 'resetpassword'},
+  { pathUrl: '/theme', routeFile: 'theme'}
 ];
 var app = express();
 // view engine setup
