@@ -1,0 +1,12 @@
+let express = require("express");
+let router = express.Router();
+const helper = require('../utilities/helper');
+const savethemecategoryCtrl = require('../controllers/themecategories/save');
+const listthemecategoryCtrl = require('../controllers/themecategories/list');
+const getthemecategoryCtrl = require('../controllers/themecategories/getone');
+const removethemecategoryCtrl = require('../controllers/themecategories/remove');
+router.post('/', helper.authenticateToken, listthemecategoryCtrl.list);
+router.post('/save', helper.authenticateToken, savethemecategoryCtrl.save);
+router.post('/getone', helper.authenticateToken, getthemecategoryCtrl.getone);
+router.post('/remove', helper.authenticateToken, removethemecategoryCtrl.remove);
+module.exports = router;

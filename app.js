@@ -20,6 +20,7 @@ const adminpaths = [
   { pathUrl: '/customer', routeFile: 'customer'},
   { pathUrl: '/forgetpassword', routeFile: 'forgetpassword'},
   { pathUrl: '/resetpassword', routeFile: 'resetpassword'},
+  { pathUrl: '/themecategories', routeFile: 'themecategories'},
   { pathUrl: '/theme', routeFile: 'theme'}
 ];
 var app = express();

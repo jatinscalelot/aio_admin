@@ -1,14 +1,7 @@
-const roleModel = require('../../models/roles.model');
 const mongoConnection = require('../../utilities/connections');
 const responseManager = require('../../utilities/response.manager');
 const constants = require('../../utilities/constants');
-const helper = require('../../utilities/helper');
-const adminModel = require('../../models/admins.model');
 const customerModel = require('../../models/customers.model');
-const customeruserModel = require('../../models/customerusers.model');
-const countriesModel = require('../../models/countries.model');
-const customerroleModel = require('../../models/customerroles.model');
-const permissionModel = require('../../models/permissions.model');
 const mongoose = require('mongoose');
 exports.domain = async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');

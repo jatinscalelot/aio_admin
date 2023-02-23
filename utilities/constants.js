@@ -7,7 +7,8 @@ let constants = {
         permissions : 'permissions',
         customers: 'customers',
         customerroles: 'customerroles',
-        customerusers: 'customerusers'
+        customerusers: 'customerusers',
+        themecategories: 'themecategories'
     }
 };
 module.exports = constants;
